@@ -15,26 +15,26 @@ const USERS = [
 ];
 
 const PRODUCTS = [
-  { id: "p1",  name: "Rolex GMT-Master II",       category: "Watches",      image: "https://picsum.photos/seed/p1/400/300",  description: "Classic dual-time pilot watch, immaculate condition.",     stock: 1, status: "Listed", startingBid: 500 },
-  { id: "p2",  name: "Ming Dynasty Vase",         category: "Art",          image: "https://picsum.photos/seed/p2/400/300",  description: "Authenticated Ming era ceramic, museum-grade.",            stock: 1, status: "Draft",  startingBid: 100 },
-  { id: "p3",  name: "Antique Oak Chair Set",     category: "Furniture",    image: "https://picsum.photos/seed/p3/400/300",  description: "Set of four 19th-century English oak dining chairs.",       stock: 4, status: "Listed", startingBid: 50 },
-  { id: "p4",  name: "1911 Liberty Coin Set",     category: "Collectibles", image: "https://picsum.photos/seed/p4/400/300",  description: "Complete 1911 Liberty Head silver coin collection.",        stock: 1, status: "Sold",   startingBid: 200 },
-  { id: "p5",  name: "Patek Philippe Calatrava",  category: "Watches",      image: "https://picsum.photos/seed/p5/400/300",  description: "Reference 5196 in 18k rose gold with original papers.",     stock: 1, status: "Listed", startingBid: 8000 },
-  { id: "p6",  name: "Banksy Original Print",     category: "Art",          image: "https://picsum.photos/seed/p6/400/300",  description: "Signed limited edition print, 64/100, with COA.",           stock: 1, status: "Listed", startingBid: 3500 },
-  { id: "p7",  name: "Mid-Century Lounge Chair",  category: "Furniture",    image: "https://picsum.photos/seed/p7/400/300",  description: "Original 1958 Eames lounge chair in walnut and leather.",   stock: 1, status: "Listed", startingBid: 1200 },
-  { id: "p8",  name: "Charizard 1st Edition",     category: "Collectibles", image: "https://picsum.photos/seed/p8/400/300",  description: "PSA 9 grade, holographic, 1st edition shadowless.",         stock: 1, status: "Listed", startingBid: 2200 },
-  { id: "p9",  name: "Cartier Tank Solo",         category: "Watches",      image: "https://picsum.photos/seed/p9/400/300",  description: "Steel case, leather strap, 2019 model with box.",           stock: 1, status: "Listed", startingBid: 1800 },
-  { id: "p10", name: "Picasso Signed Sketch",     category: "Art",          image: "https://picsum.photos/seed/p10/400/300", description: "Pencil sketch, signed lower right, period frame.",           stock: 1, status: "Draft",  startingBid: 12000 },
-  { id: "p11", name: "Eames Walnut Stool",        category: "Furniture",    image: "https://picsum.photos/seed/p11/400/300", description: "Iconic time-life walnut stool, original Herman Miller.",    stock: 2, status: "Listed", startingBid: 600 },
-  { id: "p12", name: "Marvel Comic Stash 1980s",  category: "Collectibles", image: "https://picsum.photos/seed/p12/400/300", description: "Lot of 24 issues, X-Men, Spider-Man, condition VG-NM.",     stock: 1, status: "Listed", startingBid: 350 },
-  { id: "p13", name: "Omega Seamaster Diver",     category: "Watches",      image: "https://picsum.photos/seed/p13/400/300", description: "300m diver, 2021, full set with extended warranty.",         stock: 1, status: "Listed", startingBid: 2400 },
-  { id: "p14", name: "Monet Watercolor Study",    category: "Art",          image: "https://picsum.photos/seed/p14/400/300", description: "Attributed watercolor, provenance documented.",              stock: 1, status: "Listed", startingBid: 6500 },
-  { id: "p15", name: "Persian Heritage Rug",      category: "Furniture",    image: "https://picsum.photos/seed/p15/400/300", description: "Hand-knotted Tabriz, 200 x 300 cm, 1960s.",                  stock: 1, status: "Listed", startingBid: 900 },
-  { id: "p16", name: "Star Wars Vintage Figures", category: "Collectibles", image: "https://picsum.photos/seed/p16/400/300", description: "12-figure 1977-1985 set, all with original weapons.",        stock: 1, status: "Listed", startingBid: 480 },
-  { id: "p17", name: "Tudor Black Bay 58",        category: "Watches",      image: "https://picsum.photos/seed/p17/400/300", description: "Burgundy bezel, fabric strap, 2022 unworn.",                 stock: 1, status: "Listed", startingBid: 2900 },
-  { id: "p18", name: "Tiffany Sapphire Ring",     category: "Jewelry",      image: "https://picsum.photos/seed/p18/400/300", description: "Platinum band, 2.1ct Ceylon sapphire, certified.",           stock: 1, status: "Listed", startingBid: 4200 },
-  { id: "p19", name: "Antique Brass Telescope",   category: "Collectibles", image: "https://picsum.photos/seed/p19/400/300", description: "Victorian-era 4-draw telescope, leather wrapped.",           stock: 1, status: "Sold",   startingBid: 320 },
-  { id: "p20", name: "Cartier Love Bracelet",     category: "Jewelry",      image: "https://picsum.photos/seed/p20/400/300", description: "18k rose gold, size 17, with screwdriver and box.",          stock: 1, status: "Listed", startingBid: 5400 }
+  { id: "p1",  name: "Rolex GMT-Master II",       category: "Watches",      image: "p1.png",  description: "Classic dual-time pilot watch, immaculate condition.",     stock: 1, status: "Listed", startingBid: 500 },
+  { id: "p2",  name: "Ming Dynasty Vase",         category: "Art",          image: "p2.png",  description: "Authenticated Ming era ceramic, museum-grade.",            stock: 1, status: "Draft",  startingBid: 100 },
+  { id: "p3",  name: "Antique Oak Chair Set",     category: "Furniture",    image: "p3.png",  description: "Set of four 19th-century English oak dining chairs.",       stock: 4, status: "Listed", startingBid: 50 },
+  { id: "p4",  name: "1911 Liberty Coin Set",     category: "Collectibles", image: "p4.png",  description: "Complete 1911 Liberty Head silver coin collection.",        stock: 1, status: "Sold",   startingBid: 200 },
+  { id: "p5",  name: "Patek Philippe Calatrava",  category: "Watches",      image: "p5.png",  description: "Reference 5196 in 18k rose gold with original papers.",     stock: 1, status: "Listed", startingBid: 8000 },
+  { id: "p6",  name: "Banksy Original Print",     category: "Art",          image: "p6.png",  description: "Signed limited edition print, 64/100, with COA.",           stock: 1, status: "Listed", startingBid: 3500 },
+  { id: "p7",  name: "Mid-Century Lounge Chair",  category: "Furniture",    image: "p7.png",  description: "Original 1958 Eames lounge chair in walnut and leather.",   stock: 1, status: "Listed", startingBid: 1200 },
+  { id: "p8",  name: "Charizard 1st Edition",     category: "Collectibles", image: "p8.png",  description: "PSA 9 grade, holographic, 1st edition shadowless.",         stock: 1, status: "Listed", startingBid: 2200 },
+  { id: "p9",  name: "Cartier Tank Solo",         category: "Watches",      image: "p9.png",  description: "Steel case, leather strap, 2019 model with box.",           stock: 1, status: "Listed", startingBid: 1800 },
+  { id: "p10", name: "Picasso Signed Sketch",     category: "Art",          image: "p10.png", description: "Pencil sketch, signed lower right, period frame.",           stock: 1, status: "Draft",  startingBid: 12000 },
+  { id: "p11", name: "Eames Walnut Stool",        category: "Furniture",    image: "p11.png", description: "Iconic time-life walnut stool, original Herman Miller.",    stock: 2, status: "Listed", startingBid: 600 },
+  { id: "p12", name: "Marvel Comic Stash 1980s",  category: "Collectibles", image: "p12.png", description: "Lot of 24 issues, X-Men, Spider-Man, condition VG-NM.",     stock: 1, status: "Listed", startingBid: 350 },
+  { id: "p13", name: "Omega Seamaster Diver",     category: "Watches",      image: "p13.png", description: "300m diver, 2021, full set with extended warranty.",         stock: 1, status: "Listed", startingBid: 2400 },
+  { id: "p14", name: "Monet Watercolor Study",    category: "Art",          image: "p14.png", description: "Attributed watercolor, provenance documented.",              stock: 1, status: "Listed", startingBid: 6500 },
+  { id: "p15", name: "Persian Heritage Rug",      category: "Furniture",    image: "p15.png", description: "Hand-knotted Tabriz, 200 x 300 cm, 1960s.",                  stock: 1, status: "Listed", startingBid: 900 },
+  { id: "p16", name: "Star Wars Vintage Figures", category: "Collectibles", image: "p16.png", description: "12-figure 1977-1985 set, all with original weapons.",        stock: 1, status: "Listed", startingBid: 480 },
+  { id: "p17", name: "Tudor Black Bay 58",        category: "Watches",      image: "p17.png", description: "Burgundy bezel, fabric strap, 2022 unworn.",                 stock: 1, status: "Listed", startingBid: 2900 },
+  { id: "p18", name: "Tiffany Sapphire Ring",     category: "Jewelry",      image: "p18.png", description: "Platinum band, 2.1ct Ceylon sapphire, certified.",           stock: 1, status: "Listed", startingBid: 4200 },
+  { id: "p19", name: "Antique Brass Telescope",   category: "Collectibles", image: "p19.png", description: "Victorian-era 4-draw telescope, leather wrapped.",           stock: 1, status: "Sold",   startingBid: 320 },
+  { id: "p20", name: "Cartier Love Bracelet",     category: "Jewelry",      image: "p20.png", description: "18k rose gold, size 17, with screwdriver and box.",          stock: 1, status: "Listed", startingBid: 5400 }
 ];
 
 const NOW = Date.now();
@@ -203,6 +203,19 @@ const STATS = {
   /* Win rate for donut chart */
   winRate: 73
 };
+
+/* ---------- Path helpers ---------- */
+/**
+ * Resolves a product image filename to a path that works whether the page
+ * is at project root (index.html) or inside admin/ (admin/dashboard.html etc.).
+ * If the value is already a full URL or absolute path, returns it unchanged.
+ */
+function productImagePath(filename) {
+  if (!filename) return "";
+  if (/^(https?:|data:|\/)/.test(filename)) return filename;
+  const inAdmin = location.pathname.indexOf("/admin/") !== -1;
+  return (inAdmin ? "../" : "") + "assets/images/products/" + filename;
+}
 
 /* ---------- Lookup helpers ---------- */
 function findProduct(id)  { return PRODUCTS.find(p => p.id === id); }

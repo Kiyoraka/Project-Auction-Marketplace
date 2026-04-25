@@ -46,7 +46,7 @@ function renderAuctionCard(a) {
 
   return [
     '<article class="auction-card" data-auction-id="' + a.id + '">',
-      '<div class="ac-img" style="background-image:url(\'' + product.image + '\')">',
+      '<div class="ac-img" style="background-image:url(\'' + productImagePath(product.image) + '\')">',
         statusBadge,
       '</div>',
       '<div class="ac-body">',
@@ -222,7 +222,7 @@ function openBidModal(auctionId) {
   /* Populate context strip */
   const ctx = document.getElementById("bid-context");
   ctx.innerHTML = [
-    '<div class="bid-context-img" style="background-image:url(\'' + product.image + '\')"></div>',
+    '<div class="bid-context-img" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
     '<div class="bid-context-body">',
       '<div class="bid-context-title">' + escapeHtml(product.name) + '</div>',
       '<div class="bid-context-meta">',
@@ -359,7 +359,7 @@ function renderCarouselSlide(a, idx, total) {
   return [
     '<div class="hc-slide" data-slide-index="' + idx + '">',
       '<div class="hc-card">',
-        '<div class="hc-img" style="background-image:url(\'' + product.image + '\')">',
+        '<div class="hc-img" style="background-image:url(\'' + productImagePath(product.image) + '\')">',
           '<span class="badge badge-success hc-img-status"><span class="badge-dot"></span>Live</span>',
           '<span class="hc-img-counter">' + (idx + 1) + ' / ' + total + '</span>',
         '</div>',

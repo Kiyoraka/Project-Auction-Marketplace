@@ -67,7 +67,7 @@ function renderRecentBids() {
     return [
       '<tr>',
         '<td><div class="item-cell">',
-          '<div class="item-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+          '<div class="item-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
           '<div>' + escapeHtmlAdmin(product.name) + '</div>',
         '</div></td>',
         '<td><div class="user-cell">',
@@ -89,7 +89,7 @@ function renderRecentBids() {
       if (!product || !user) return "";
       return [
         '<div class="m-card">',
-          '<div class="m-card-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+          '<div class="m-card-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
           '<div class="m-card-body">',
             '<div class="m-card-title">' + escapeHtmlAdmin(product.name) + '</div>',
             '<div class="m-card-meta">' + escapeHtmlAdmin(user.username) + ' · <span class="price">' + formatRMFull(b.amount) + '</span></div>',
@@ -113,7 +113,7 @@ function renderEndingSoon() {
     if (!product) return "";
     return [
       '<div class="es-item">',
-        '<div class="es-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+        '<div class="es-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
         '<div class="es-body">',
           '<div class="es-title">' + escapeHtmlAdmin(product.name) + '</div>',
           '<div class="es-meta">' + escapeHtmlAdmin(product.category) + ' · ' + formatRMFull(a.currentBid) + '</div>',

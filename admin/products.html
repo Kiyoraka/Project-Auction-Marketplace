@@ -199,7 +199,7 @@
       const newId = "p" + (PRODUCTS.length + 1);
       PRODUCTS.unshift({
         id: newId, name: name, category: cat,
-        image: img || ("https://picsum.photos/seed/" + newId + "/400/300"),
+        image: img || (newId + ".png"),
         description: desc, stock: 1, status: "Draft", startingBid: bid
       });
       closeModal("add-product-modal");
@@ -240,7 +240,7 @@
         '<span class="badge">' + escapeHtmlAdmin(p.status) + '</span>';
       return [
         '<div class="m-card">',
-          '<div class="m-card-thumb" style="background-image:url(\'' + p.image + '\')"></div>',
+          '<div class="m-card-thumb" style="background-image:url(\'' + productImagePath(p.image) + '\')"></div>',
           '<div class="m-card-body">',
             '<div class="m-card-row1">',
               '<div class="m-card-title">' + escapeHtmlAdmin(p.name) + '</div>',
@@ -263,7 +263,7 @@
         '<tr>',
           '<td><input type="checkbox" /></td>',
           '<td><div class="item-cell">',
-            '<div class="item-thumb" style="background-image:url(\'' + p.image + '\')"></div>',
+            '<div class="item-thumb" style="background-image:url(\'' + productImagePath(p.image) + '\')"></div>',
             '<div><div style="font-weight:600">' + escapeHtmlAdmin(p.name) + '</div>',
             '<div class="text-xs text-muted" style="max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtmlAdmin(p.description || "") + '</div></div>',
           '</div></td>',

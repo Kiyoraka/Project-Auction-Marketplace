@@ -183,7 +183,7 @@
       if (!product || !winner) return "";
       return [
         '<div class="m-card" data-order="' + o.id + '">',
-          '<div class="m-card-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+          '<div class="m-card-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
           '<div class="m-card-body">',
             '<div class="m-card-row1">',
               '<div class="m-card-title">' + escapeHtmlAdmin(product.name) + '</div>',
@@ -205,7 +205,7 @@
         '<tr class="row-clickable" data-order="' + o.id + '">',
           '<td class="num font-bold">#' + o.id + '</td>',
           '<td><div class="item-cell">',
-            '<div class="item-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+            '<div class="item-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
             '<div>' + escapeHtmlAdmin(product.name) + '</div>',
           '</div></td>',
           '<td><div class="user-cell">',
@@ -237,7 +237,7 @@
     document.getElementById("order-detail-title").textContent = "Order #" + o.id;
     document.getElementById("order-detail-body").innerHTML = [
       '<div class="bid-context" style="margin-bottom:20px">',
-        '<div class="bid-context-img" style="background-image:url(\'' + (product ? product.image : '') + '\')"></div>',
+        '<div class="bid-context-img" style="background-image:url(\'' + (product ? productImagePath(product.image) : '') + '\')"></div>',
         '<div class="bid-context-body">',
           '<div class="bid-context-title">' + (product ? escapeHtmlAdmin(product.name) : "Unknown item") + '</div>',
           '<div class="bid-context-meta">',

@@ -179,7 +179,7 @@
                       "Ended";
       return [
         '<div class="m-card" data-detail="' + a.id + '">',
-          '<div class="m-card-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+          '<div class="m-card-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
           '<div class="m-card-body">',
             '<div class="m-card-row1">',
               '<div class="m-card-title">' + escapeHtmlAdmin(product.name) + '</div>',
@@ -198,7 +198,7 @@
       return [
         '<tr class="row-clickable" data-detail="' + a.id + '">',
           '<td><div class="item-cell">',
-            '<div class="item-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+            '<div class="item-thumb" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
             '<div><div style="font-weight:600">' + escapeHtmlAdmin(product.name) + '</div>',
             '<div class="text-xs text-muted">' + escapeHtmlAdmin(product.category) + '</div></div>',
           '</div></td>',
@@ -228,7 +228,7 @@
     const body = document.getElementById("detail-body");
     body.innerHTML = [
       '<div class="bid-context" style="margin-bottom:20px">',
-        '<div class="bid-context-img" style="background-image:url(\'' + product.image + '\')"></div>',
+        '<div class="bid-context-img" style="background-image:url(\'' + productImagePath(product.image) + '\')"></div>',
         '<div class="bid-context-body">',
           '<div class="bid-context-title">' + escapeHtmlAdmin(product.name) + '</div>',
           '<div class="bid-context-meta">',
