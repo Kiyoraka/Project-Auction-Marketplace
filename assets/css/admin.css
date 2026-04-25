@@ -494,6 +494,84 @@
 .timeline-item.is-done::before { background: var(--success); }
 .timeline-when { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
+/* ---------- Mobile Card List (Pattern 2) ---------- */
+/* Hidden on desktop; revealed inside the 880px breakpoint below */
+.m-list { display: none; padding: 12px; }
+
+.m-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background var(--t-fast), transform var(--t-fast);
+}
+.m-card:active { transform: scale(0.99); }
+.m-card:hover  { background: var(--surface-2); }
+
+.m-card-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--surface-2);
+  flex-shrink: 0;
+}
+.m-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.m-card-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.m-card-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.m-card-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.m-card-meta .num,
+.m-card-meta .price {
+  color: var(--text);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.m-card-chev {
+  color: var(--text-subtle);
+  flex-shrink: 0;
+}
+.m-list-empty {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+}
+
 /* ---------- Responsive (admin) ---------- */
 @media (max-width: 1100px) {
   .stats { grid-template-columns: repeat(2, 1fr); }
@@ -522,6 +600,11 @@
   .topbar { padding: 0 16px; }
   .page { padding: 16px; }
   .form-row { grid-template-columns: 1fr; }
+
+  /* Pattern 2 swap: hide tables, show mobile card lists */
+  .panel-body > .atable { display: none; }
+  .panel-body > .m-list,
+  .m-list                 { display: block; }
 }
 
 @media (max-width: 520px) {
