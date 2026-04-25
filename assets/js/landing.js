@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initLoginModal();
   initBidModal();
   initContactForm();
+  initHeroCarousel();
+  initFab();
   reflectAuthState();
 });
 
@@ -331,6 +333,162 @@ function initContactForm() {
     if (!form.checkValidity()) { form.reportValidity(); return; }
     showToast("Message sent. We'll be in touch soon.", "success");
     form.reset();
+  });
+}
+
+/* ----------------------------------------------------------
+   Mobile Hero Carousel (Design 5)
+   Renders ALWAYS (CSS controls visibility). Auto-flips
+   between mobile (visible) and desktop (hidden) on resize.
+   ---------------------------------------------------------- */
+
+let carouselIndex = 0;
+let carouselSlides = [];
+
+function pickFeaturedAuctions() {
+  /* Top 5 live auctions by current bid */
+  return AUCTIONS
+    .filter(a => a.status === "live")
+    .sort((a, b) => b.currentBid - a.currentBid)
+    .slice(0, 5);
+}
+
+function renderCarouselSlide(a, idx, total) {
+  const product = findProduct(a.productId);
+  if (!product) return "";
+  return [
+    '<div class="hc-slide" data-slide-index="' + idx + '">',
+      '<div class="hc-card">',
+        '<div class="hc-img" style="background-image:url(\'' + product.image + '\')">',
+          '<span class="badge badge-success hc-img-status"><span class="badge-dot"></span>Live</span>',
+          '<span class="hc-img-counter">' + (idx + 1) + ' / ' + total + '</span>',
+        '</div>',
+        '<div class="hc-body">',
+          '<div class="hc-cat">' + escapeHtml(product.category) + '</div>',
+          '<h3 class="hc-title">' + escapeHtml(product.name) + '</h3>',
+          '<div class="hc-meta">',
+            '<div>',
+              '<div class="hc-bid-label">Current bid</div>',
+              '<div class="price hc-bid">' + formatRMFull(a.currentBid) + '</div>',
+            '</div>',
+            '<div class="hc-time">' + timeLeft(a.endsAt) + '</div>',
+          '</div>',
+          '<button class="btn btn-primary" data-bid="' + a.id + '">Place Bid</button>',
+        '</div>',
+      '</div>',
+    '</div>'
+  ].join("");
+}
+
+function initHeroCarousel() {
+  const track = document.getElementById("hc-track");
+  const dotsHost = document.getElementById("hc-dots");
+  if (!track || !dotsHost) return;
+
+  carouselSlides = pickFeaturedAuctions();
+  if (carouselSlides.length === 0) return;
+
+  /* Render slides */
+  track.innerHTML = carouselSlides
+    .map((a, i) => renderCarouselSlide(a, i, carouselSlides.length))
+    .join("");
+
+  /* Render dots */
+  dotsHost.innerHTML = carouselSlides
+    .map((_, i) => '<button class="hc-dot' + (i === 0 ? " is-active" : "") +
+                   '" data-dot="' + i + '" aria-label="Go to slide ' + (i + 1) + '"></button>')
+    .join("");
+
+  /* Dot clicks */
+  dotsHost.addEventListener("click", function (e) {
+    const dot = e.target.closest(".hc-dot");
+    if (!dot) return;
+    goToSlide(parseInt(dot.getAttribute("data-dot"), 10));
+  });
+
+  /* Bid button on a slide -> open bid modal */
+  track.addEventListener("click", function (e) {
+    const bidBtn = e.target.closest("[data-bid]");
+    if (bidBtn) openBidModal(bidBtn.getAttribute("data-bid"));
+  });
+
+  /* Touch swipe */
+  let startX = 0;
+  let dx = 0;
+  let dragging = false;
+
+  track.addEventListener("touchstart", function (e) {
+    if (e.touches.length !== 1) return;
+    startX = e.touches[0].clientX;
+    dx = 0;
+    dragging = true;
+    track.style.transition = "none";
+  }, { passive: true });
+
+  track.addEventListener("touchmove", function (e) {
+    if (!dragging) return;
+    dx = e.touches[0].clientX - startX;
+    const w = track.parentElement.clientWidth;
+    const offset = -carouselIndex * w + dx;
+    track.style.transform = "translateX(" + offset + "px)";
+  }, { passive: true });
+
+  track.addEventListener("touchend", function () {
+    if (!dragging) return;
+    dragging = false;
+    track.style.transition = "";
+    const threshold = track.parentElement.clientWidth * 0.18;
+    if (dx <= -threshold && carouselIndex < carouselSlides.length - 1) {
+      goToSlide(carouselIndex + 1);
+    } else if (dx >= threshold && carouselIndex > 0) {
+      goToSlide(carouselIndex - 1);
+    } else {
+      goToSlide(carouselIndex); /* snap back */
+    }
+  });
+
+  /* Window resize: re-snap to current slide so widths stay aligned
+     (handles desktop->mobile->desktop flips and orientation changes) */
+  window.addEventListener("resize", debounce(function () {
+    goToSlide(carouselIndex);
+  }, 100));
+
+  /* Initial position */
+  goToSlide(0);
+}
+
+function goToSlide(i) {
+  const track = document.getElementById("hc-track");
+  if (!track || carouselSlides.length === 0) return;
+  carouselIndex = Math.max(0, Math.min(i, carouselSlides.length - 1));
+  const w = track.parentElement.clientWidth;
+  track.style.transform = "translateX(" + (-carouselIndex * w) + "px)";
+
+  /* Update dot active state */
+  document.querySelectorAll(".hc-dot").forEach(function (dot, idx) {
+    dot.classList.toggle("is-active", idx === carouselIndex);
+  });
+}
+
+function debounce(fn, wait) {
+  let t;
+  return function () {
+    const args = arguments;
+    clearTimeout(t);
+    t = setTimeout(function () { fn.apply(null, args); }, wait);
+  };
+}
+
+/* ----------------------------------------------------------
+   Floating Action Button (mobile)
+   ---------------------------------------------------------- */
+
+function initFab() {
+  const fab = document.getElementById("fab");
+  if (!fab) return;
+  fab.addEventListener("click", function () {
+    const target = document.getElementById("auction");
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
