@@ -390,13 +390,22 @@
   border-bottom: 1px solid var(--border);
   margin-bottom: 24px;
   overflow-x: auto;
+  /* Hide scrollbar (still scrollable via swipe/drag) */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/legacy Edge */
 }
+.tabs::-webkit-scrollbar { display: none; } /* Chromium/Safari */
+
 .tab {
   padding: 10px 16px;
   font-size: 14px;
   font-weight: 600;
   color: var(--text-muted);
   border-bottom: 2px solid transparent;
+  /* Pull tab down 1px so its border overlaps the parent .tabs border-bottom -
+     active state's 2px primary line cleanly covers the 1px gray instead of
+     stacking under it (fixes the doubled-underline glitch on inactive tabs) */
+  margin-bottom: -1px;
   transition: color var(--t), border-color var(--t);
   white-space: nowrap;
   background: none;
