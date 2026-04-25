@@ -207,6 +207,46 @@
 }
 .page-greeting { font-size: 15px; color: var(--text-muted); margin-top: 4px; }
 
+/* ---------- Page Actions (search + primary action above content) ---------- */
+.page-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.page-actions > .search-input {
+  flex: 1;
+  max-width: none;
+}
+.page-actions > .btn {
+  flex-shrink: 0;
+  min-height: 44px;
+}
+@media (max-width: 520px) {
+  .page-actions > .search-input,
+  .page-actions > .btn {
+    flex: 1 1 100%;
+  }
+  .page-actions > .btn {
+    min-height: 48px;
+  }
+}
+
+/* Filter row: two selects share one row */
+.filter-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.filter-row > .select {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+
 /* ---------- Stat cards ---------- */
 .stats {
   display: grid;
