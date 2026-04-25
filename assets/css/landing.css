@@ -385,6 +385,65 @@
 .footer-links { display: flex; gap: 24px; }
 .footer-links a:hover { color: var(--text); }
 
+/* ---------- Bid Modal ---------- */
+.bid-context {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  margin-bottom: 20px;
+}
+.bid-context-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--border);
+  flex-shrink: 0;
+}
+.bid-context-body { flex: 1; min-width: 0; }
+.bid-context-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bid-context-meta {
+  display: flex;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.bid-context-meta strong { color: var(--text); font-family: var(--font-mono); font-weight: 700; }
+
+.bid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.bid-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+@media (max-width: 520px) {
+  .bid-grid { grid-template-columns: 1fr; }
+  .bid-actions { flex-direction: column-reverse; }
+  .bid-actions .btn { width: 100%; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .auction-grid { grid-template-columns: repeat(3, 1fr); }
