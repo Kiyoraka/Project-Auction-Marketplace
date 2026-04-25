@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initAuctionGrid();
   initFilterChips();
   initLoginModal();
+  initBidModal();
   initContactForm();
   reflectAuthState();
 });
@@ -81,15 +82,15 @@ function initAuctionGrid() {
 
   paint();
 
-  /* Bid buttons -> open login (bidding requires auth in real app) */
+  /* Bid buttons / card click -> open guest bid form */
   grid.addEventListener("click", function (e) {
     const bidBtn = e.target.closest("[data-bid]");
     if (bidBtn) {
-      openLoginModal();
+      openBidModal(bidBtn.getAttribute("data-bid"));
       return;
     }
     const card = e.target.closest(".auction-card");
-    if (card) openLoginModal();
+    if (card) openBidModal(card.getAttribute("data-auction-id"));
   });
 
   /* Re-paint timers every minute so countdowns stay fresh */
@@ -198,6 +199,123 @@ function reflectAuthState() {
   if (!isAuthenticated()) return;
   document.querySelectorAll("[data-open-login]").forEach(function (btn) {
     btn.textContent = "Dashboard";
+  });
+}
+
+/* ----------------------------------------------------------
+   Bid Modal (guest bid form)
+   ---------------------------------------------------------- */
+
+let activeBidAuctionId = null;
+
+function openBidModal(auctionId) {
+  const auction = findAuction(auctionId);
+  if (!auction) return;
+  const product = findProduct(auction.productId);
+  if (!product) return;
+
+  activeBidAuctionId = auctionId;
+  const minBid = auction.currentBid + 10;
+
+  /* Populate context strip */
+  const ctx = document.getElementById("bid-context");
+  ctx.innerHTML = [
+    '<div class="bid-context-img" style="background-image:url(\'' + product.image + '\')"></div>',
+    '<div class="bid-context-body">',
+      '<div class="bid-context-title">' + escapeHtml(product.name) + '</div>',
+      '<div class="bid-context-meta">',
+        '<div>Current bid: <strong>' + formatRMFull(auction.currentBid) + '</strong></div>',
+        '<div>Time left: <strong>' + timeLeft(auction.endsAt) + '</strong></div>',
+      '</div>',
+    '</div>'
+  ].join("");
+
+  /* Reset form, set min amount + help text */
+  const form = document.getElementById("bid-form");
+  form.reset();
+  const amount = document.getElementById("bf-amount");
+  amount.min = minBid;
+  amount.value = minBid;
+  document.getElementById("bf-amount-help").textContent = "Minimum bid: " + formatRMFull(minBid);
+
+  const errBox = document.getElementById("bf-error");
+  errBox.classList.add("hidden");
+  errBox.textContent = "";
+
+  /* Show modal */
+  const modal = document.getElementById("bid-modal");
+  modal.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+  setTimeout(function () {
+    document.getElementById("bf-name").focus();
+  }, 50);
+}
+
+function closeBidModal() {
+  const modal = document.getElementById("bid-modal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  document.body.style.overflow = "";
+  activeBidAuctionId = null;
+}
+
+function initBidModal() {
+  /* Close button(s) */
+  document.querySelectorAll("[data-close-bid]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      closeBidModal();
+    });
+  });
+
+  /* Backdrop click — already wired by modal-backdrop[data-close-on-backdrop] in initLoginModal,
+     but bid-modal has its own backdrop, so wire it the same way */
+  const bidBackdrop = document.getElementById("bid-modal");
+  if (bidBackdrop) {
+    bidBackdrop.addEventListener("click", function (e) {
+      if (e.target === bidBackdrop) closeBidModal();
+    });
+  }
+
+  /* Esc */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeBidModal();
+  });
+
+  /* Submit */
+  const form = document.getElementById("bid-form");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name    = document.getElementById("bf-name").value.trim();
+    const phone   = document.getElementById("bf-phone").value.trim();
+    const address = document.getElementById("bf-address").value.trim();
+    const amount  = parseInt(document.getElementById("bf-amount").value, 10);
+    const errBox  = document.getElementById("bf-error");
+
+    if (!name || !phone || !address || !Number.isFinite(amount)) {
+      errBox.textContent = "Please fill in every field.";
+      errBox.classList.remove("hidden");
+      return;
+    }
+
+    const auction = findAuction(activeBidAuctionId);
+    if (!auction) { closeBidModal(); return; }
+
+    if (amount <= auction.currentBid) {
+      errBox.textContent = "Bid must be higher than the current bid (" + formatRMFull(auction.currentBid) + ").";
+      errBox.classList.remove("hidden");
+      return;
+    }
+
+    /* Apply the bid in-memory and re-paint */
+    auction.currentBid = amount;
+    auction.bidCount  += 1;
+    if (window.__paintAuctionGrid) window.__paintAuctionGrid();
+
+    closeBidModal();
+    showToast("Bid placed at " + formatRMFull(amount) + ". We'll be in touch, " + name.split(" ")[0] + ".", "success");
   });
 }
 
