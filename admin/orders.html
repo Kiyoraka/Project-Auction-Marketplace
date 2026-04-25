@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orders — AuctionHub Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/shared.css" />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+
+  <script src="../assets/js/auth.js"></script>
+  <script>guardAdmin();</script>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><span class="brand-mark">A</span><span>AuctionHub</span></div>
+    <nav class="sidebar-nav">
+      <a class="snav-item" href="dashboard.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Main</a>
+      <a class="snav-item" href="analytics.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Analytics</a>
+      <a class="snav-item" href="products.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Products</a>
+      <a class="snav-item" href="auctions.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 13-7.5 7.5c-.83.83-2.17.83-3 0a2.12 2.12 0 0 1 0-3L11 10"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>Auctions</a>
+      <a class="snav-item is-active" href="orders.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Orders</a>
+      <a class="snav-item" href="settings.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <div class="user-avatar" id="user-initial">A</div>
+        <div class="user-info">
+          <div class="user-name" id="user-email">admin@gmail.com</div>
+          <div class="user-role">Administrator</div>
+        </div>
+        <button class="logout-btn" id="logout-btn" aria-label="Logout"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-trigger" id="menu-trigger" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div>
+          <div class="topbar-title">Orders</div>
+          <div class="topbar-crumbs">Admin <span>›</span> Orders</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-input">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="input" type="search" id="order-search" placeholder="Search orders..." />
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+
+      <div class="tabs" id="order-tabs">
+        <button class="tab is-active" data-tab="all">All <span class="tab-count" id="c-all">0</span></button>
+        <button class="tab" data-tab="awaiting_payment">Awaiting Pay <span class="tab-count" id="c-awaiting_payment">0</span></button>
+        <button class="tab" data-tab="paid">Paid <span class="tab-count" id="c-paid">0</span></button>
+        <button class="tab" data-tab="shipped">Shipped <span class="tab-count" id="c-shipped">0</span></button>
+        <button class="tab" data-tab="completed">Completed <span class="tab-count" id="c-completed">0</span></button>
+        <button class="tab" data-tab="cancelled">Cancelled <span class="tab-count" id="c-cancelled">0</span></button>
+      </div>
+
+      <section class="panel">
+        <div class="panel-body" style="padding:0">
+          <table class="atable">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Item</th>
+                <th>Winner</th>
+                <th>Total</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal-backdrop" id="order-detail-modal">
+  <div class="modal modal-lg" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <span class="modal-title" id="order-detail-title">Order Detail</span>
+      <button class="modal-close" data-close-order aria-label="Close">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="order-detail-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-close-order>Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-host" id="toast-host"></div>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/admin.js"></script>
+<script>
+  let orderTab = "all";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    bootstrapAdminShell();
+    initOrdersPage();
+  });
+
+  function initOrdersPage() {
+    /* Tab counts */
+    document.getElementById("c-all").textContent = ORDERS.length;
+    ["awaiting_payment", "paid", "shipped", "completed", "cancelled"].forEach(function (s) {
+      document.getElementById("c-" + s).textContent = ORDERS.filter(o => o.status === s).length;
+    });
+
+    document.getElementById("order-tabs").addEventListener("click", function (e) {
+      const t = e.target.closest(".tab");
+      if (!t) return;
+      document.querySelectorAll(".tab").forEach(x => x.classList.remove("is-active"));
+      t.classList.add("is-active");
+      orderTab = t.getAttribute("data-tab");
+      paint();
+    });
+
+    document.getElementById("order-search").addEventListener("input", paint);
+
+    bindModalCloseTriggers("order-detail-modal", "data-close-order");
+
+    paint();
+  }
+
+  function paint() {
+    const q = document.getElementById("order-search").value.toLowerCase().trim();
+    const list = ORDERS.filter(function (o) {
+      if (orderTab !== "all" && o.status !== orderTab) return false;
+      if (q) {
+        const auction = findAuction(o.auctionId);
+        const product = auction ? findProduct(auction.productId) : null;
+        const winner  = findUser(o.winnerId);
+        const blob = (o.id + " " + (product ? product.name : "") + " " + (winner ? winner.username : "")).toLowerCase();
+        if (blob.indexOf(q) === -1) return false;
+      }
+      return true;
+    }).sort((a, b) => b.createdAt - a.createdAt);
+
+    document.getElementById("orders-tbody").innerHTML = list.map(function (o) {
+      const auction = findAuction(o.auctionId);
+      const product = auction ? findProduct(auction.productId) : null;
+      const winner  = findUser(o.winnerId);
+      if (!product || !winner) return "";
+      return [
+        '<tr class="row-clickable" data-order="' + o.id + '">',
+          '<td class="num font-bold">#' + o.id + '</td>',
+          '<td><div class="item-cell">',
+            '<div class="item-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+            '<div>' + escapeHtmlAdmin(product.name) + '</div>',
+          '</div></td>',
+          '<td><div class="user-cell">',
+            '<div class="user-avatar">' + winner.username[0].toUpperCase() + '</div>',
+            '<div>' + escapeHtmlAdmin(winner.username) + '</div>',
+          '</div></td>',
+          '<td class="num">' + formatRMFull(o.total) + '</td>',
+          '<td class="text-muted text-sm">' + timeAgo(o.createdAt) + '</td>',
+          '<td>' + statusPill(o.status) + '</td>',
+          '<td><button class="btn btn-ghost btn-sm" aria-label="Open"><svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></td>',
+        '</tr>'
+      ].join("");
+    }).join("");
+
+    document.querySelectorAll("[data-order]").forEach(function (row) {
+      row.addEventListener("click", function () {
+        openOrderDetail(row.getAttribute("data-order"));
+      });
+    });
+  }
+
+  function openOrderDetail(id) {
+    const o = findOrder(id);
+    if (!o) return;
+    const auction = findAuction(o.auctionId);
+    const product = auction ? findProduct(auction.productId) : null;
+    const winner  = findUser(o.winnerId);
+
+    document.getElementById("order-detail-title").textContent = "Order #" + o.id;
+    document.getElementById("order-detail-body").innerHTML = [
+      '<div class="bid-context" style="margin-bottom:20px">',
+        '<div class="bid-context-img" style="background-image:url(\'' + (product ? product.image : '') + '\')"></div>',
+        '<div class="bid-context-body">',
+          '<div class="bid-context-title">' + (product ? escapeHtmlAdmin(product.name) : "Unknown item") + '</div>',
+          '<div class="bid-context-meta">',
+            '<div>Winner: <strong>' + (winner ? escapeHtmlAdmin(winner.username) : "—") + '</strong></div>',
+            '<div>Total: <strong>' + formatRMFull(o.total) + '</strong></div>',
+            '<div>Status: <strong>' + o.status.replace(/_/g, " ") + '</strong></div>',
+          '</div>',
+        '</div>',
+      '</div>',
+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">',
+        '<div>',
+          '<h5 style="margin-bottom:12px">Buyer</h5>',
+          '<div class="text-sm">',
+            '<div><strong>' + (winner ? escapeHtmlAdmin(winner.username) : "—") + '</strong></div>',
+            '<div class="text-muted">' + (winner ? escapeHtmlAdmin(winner.email) : "—") + '</div>',
+          '</div>',
+          '<h5 style="margin:20px 0 12px">Shipping</h5>',
+          '<div class="text-sm text-muted">Lot 4-23, Jalan Bukit Bintang,<br/>55100 Kuala Lumpur, Malaysia</div>',
+        '</div>',
+        '<div>',
+          '<h5 style="margin-bottom:12px">Status Timeline</h5>',
+          '<div class="timeline">',
+            o.timeline.map(function (t, i) {
+              return '<div class="timeline-item' + (i < o.timeline.length - 1 || o.status === "completed" ? " is-done" : "") + '">' +
+                '<div>' + escapeHtmlAdmin(t.label) + '</div>' +
+                '<div class="timeline-when">' + timeAgo(t.at) + '</div>' +
+              '</div>';
+            }).join(""),
+          '</div>',
+        '</div>',
+      '</div>'
+    ].join("");
+
+    openModal("order-detail-modal");
+  }
+</script>
+
+</body>
+</html>
