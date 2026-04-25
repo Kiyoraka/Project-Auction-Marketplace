@@ -79,6 +79,7 @@
             </thead>
             <tbody id="auctions-tbody"></tbody>
           </table>
+          <div class="m-list" id="auctions-mlist"></div>
         </div>
       </section>
 
@@ -153,8 +154,32 @@
     if (list.length === 0) {
       document.getElementById("auctions-tbody").innerHTML =
         '<tr><td colspan="6" style="padding:48px;text-align:center;color:var(--text-muted);font-size:14px">No auctions in this view.</td></tr>';
+      document.getElementById("auctions-mlist").innerHTML =
+        '<div class="m-list-empty">No auctions in this view.</div>';
       return;
     }
+
+    /* Mobile cards */
+    document.getElementById("auctions-mlist").innerHTML = list.map(function (a) {
+      const product = findProduct(a.productId);
+      if (!product) return "";
+      const timeStr = a.status === "live" ? timeLeft(a.endsAt) :
+                      a.status === "scheduled" ? "Starts " + timeLeft(a.startsAt) :
+                      "Ended";
+      return [
+        '<div class="m-card" data-detail="' + a.id + '">',
+          '<div class="m-card-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+          '<div class="m-card-body">',
+            '<div class="m-card-row1">',
+              '<div class="m-card-title">' + escapeHtmlAdmin(product.name) + '</div>',
+              statusPill(a.status),
+            '</div>',
+            '<div class="m-card-meta">' + escapeHtmlAdmin(product.category) + ' · <span class="price" style="color:var(--primary)">' + formatRMFull(a.currentBid) + '</span></div>',
+            '<div class="m-card-meta">' + timeStr + ' · <span class="num">' + a.bidCount + '</span> bids</div>',
+          '</div>',
+        '</div>'
+      ].join("");
+    }).join("");
 
     document.getElementById("auctions-tbody").innerHTML = list.map(function (a) {
       const product = findProduct(a.productId);

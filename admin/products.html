@@ -97,6 +97,7 @@
             </thead>
             <tbody id="products-tbody"></tbody>
           </table>
+          <div class="m-list" id="products-mlist"></div>
         </div>
         <div class="panel-foot" id="products-foot">Loading...</div>
       </section>
@@ -216,9 +217,33 @@
     if (list.length === 0) {
       document.getElementById("products-tbody").innerHTML =
         '<tr><td colspan="7" style="padding:48px;text-align:center;color:var(--text-muted);font-size:14px">No products match these filters.</td></tr>';
+      document.getElementById("products-mlist").innerHTML =
+        '<div class="m-list-empty">No products match these filters.</div>';
       document.getElementById("products-foot").textContent = "Showing 0 of " + PRODUCTS.length + " products";
       return;
     }
+
+    /* Mobile cards */
+    document.getElementById("products-mlist").innerHTML = list.map(function (p) {
+      const statusBadge =
+        p.status === "Listed" ? '<span class="badge badge-success">Listed</span>' :
+        p.status === "Draft"  ? '<span class="badge badge-warning">Draft</span>'  :
+        p.status === "Sold"   ? '<span class="badge">Sold</span>'                  :
+        '<span class="badge">' + escapeHtmlAdmin(p.status) + '</span>';
+      return [
+        '<div class="m-card">',
+          '<div class="m-card-thumb" style="background-image:url(\'' + p.image + '\')"></div>',
+          '<div class="m-card-body">',
+            '<div class="m-card-row1">',
+              '<div class="m-card-title">' + escapeHtmlAdmin(p.name) + '</div>',
+              statusBadge,
+            '</div>',
+            '<div class="m-card-meta">' + escapeHtmlAdmin(p.category) + ' · <span class="price">' + formatRMFull(p.startingBid) + '</span></div>',
+            '<div class="m-card-meta">Stock: <span class="num">' + p.stock + '</span></div>',
+          '</div>',
+        '</div>'
+      ].join("");
+    }).join("");
 
     document.getElementById("products-tbody").innerHTML = list.map(function (p) {
       const statusBadge =

@@ -56,6 +56,7 @@ function renderDashboardStats() {
 
 function renderRecentBids() {
   const tbody = document.getElementById("recent-bids-tbody");
+  const mlist = document.getElementById("recent-bids-mlist");
   if (!tbody) return;
   const recent = BIDS.slice().sort((a, b) => b.placedAt - a.placedAt).slice(0, 6);
   tbody.innerHTML = recent.map(function (b) {
@@ -78,6 +79,26 @@ function renderRecentBids() {
       '</tr>'
     ].join("");
   }).join("");
+
+  /* Mobile cards (parallel render) */
+  if (mlist) {
+    mlist.innerHTML = recent.map(function (b) {
+      const auction = findAuction(b.auctionId);
+      const product = auction ? findProduct(auction.productId) : null;
+      const user    = findUser(b.userId);
+      if (!product || !user) return "";
+      return [
+        '<div class="m-card">',
+          '<div class="m-card-thumb" style="background-image:url(\'' + product.image + '\')"></div>',
+          '<div class="m-card-body">',
+            '<div class="m-card-title">' + escapeHtmlAdmin(product.name) + '</div>',
+            '<div class="m-card-meta">' + escapeHtmlAdmin(user.username) + ' · <span class="price">' + formatRMFull(b.amount) + '</span></div>',
+            '<div class="m-card-meta">' + timeAgo(b.placedAt) + '</div>',
+          '</div>',
+        '</div>'
+      ].join("");
+    }).join("");
+  }
 }
 
 function renderEndingSoon() {
