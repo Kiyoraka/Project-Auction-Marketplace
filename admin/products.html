@@ -213,6 +213,13 @@
       return true;
     });
 
+    if (list.length === 0) {
+      document.getElementById("products-tbody").innerHTML =
+        '<tr><td colspan="7" style="padding:48px;text-align:center;color:var(--text-muted);font-size:14px">No products match these filters.</td></tr>';
+      document.getElementById("products-foot").textContent = "Showing 0 of " + PRODUCTS.length + " products";
+      return;
+    }
+
     document.getElementById("products-tbody").innerHTML = list.map(function (p) {
       const statusBadge =
         p.status === "Listed" ? '<span class="badge badge-success">Listed</span>' :

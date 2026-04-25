@@ -158,6 +158,12 @@
       return true;
     }).sort((a, b) => b.createdAt - a.createdAt);
 
+    if (list.length === 0) {
+      document.getElementById("orders-tbody").innerHTML =
+        '<tr><td colspan="7" style="padding:48px;text-align:center;color:var(--text-muted);font-size:14px">No orders in this view.</td></tr>';
+      return;
+    }
+
     document.getElementById("orders-tbody").innerHTML = list.map(function (o) {
       const auction = findAuction(o.auctionId);
       const product = auction ? findProduct(auction.productId) : null;
