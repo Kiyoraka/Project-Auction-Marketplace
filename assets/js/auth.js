@@ -9,7 +9,7 @@ const AUTH_USER_KEY = "auctionhub_user";
 
 /* Hardcoded credentials — prototype only */
 const VALID_USERS = [
-  { username: "admin", password: "admin" }
+  { username: "admin@gmail.com", password: "admin123" }
 ];
 
 function isAuthenticated() {
@@ -17,7 +17,7 @@ function isAuthenticated() {
 }
 
 function currentUser() {
-  return localStorage.getItem(AUTH_USER_KEY) || "admin";
+  return localStorage.getItem(AUTH_USER_KEY) || "admin@gmail.com";
 }
 
 /**
