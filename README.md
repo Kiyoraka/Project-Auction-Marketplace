@@ -6,16 +6,13 @@ Hardcoded vanilla-web auction marketplace prototype. Pure HTML5 + CSS3 + JavaScr
 
 ## Run
 
-Open `index.html` directly in a browser, or serve from the project root:
+Just open `index.html` in a browser — pure static, no build step, no server required.
+
+For auto-reload while editing, run from the project root:
 
 ```bash
-# Any one of these works:
 npx live-server .
-python -m http.server 8000
-php -S localhost:8000
 ```
-
-Then visit `http://localhost:8000/`.
 
 ---
 
